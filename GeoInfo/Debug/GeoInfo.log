@@ -1,0 +1,6 @@
+﻿  Program.cpp
+c:\users\user\dev\geoinfo\geoinfo\program.cpp(12): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\user\dev\geoinfo\geoinfo\program.cpp(13): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\user\dev\geoinfo\geoinfo\program.cpp(14): warning C4305: 'argument': truncation from 'double' to 'float'
+  GeoInfo.vcxproj -> C:\Users\User\Dev\GeoInfo\Debug\GeoInfo.exe
+  GeoInfo.vcxproj -> C:\Users\User\Dev\GeoInfo\Debug\GeoInfo.pdb (Partial PDB)
