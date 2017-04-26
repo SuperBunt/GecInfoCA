@@ -1,6 +1,12 @@
 #include "BST.h"
 #include <string.h>
 #include <iostream>
+#define _USE_MATH_DEFINES
+#include <math.h>
+# include <cmath>
+# include <limits>
+
+
 
 /***************************************************************************************
 
@@ -60,7 +66,7 @@ void BST::insert(Node * leaf, City val)
 
 
 // Non recursive function to delete a city by name
-bool BST::deleteName(string val)
+bool BST::deleteByName(string val)
 {
 	if (root == NULL) {
 		return false;
@@ -69,7 +75,7 @@ bool BST::deleteName(string val)
 		//delete root
 		Node *tempNode = new Node();
 		tempNode->left = root;
-		Node *nodeToRemove = deleteName(val, tempNode, root);
+		Node *nodeToRemove = deleteByName(val, tempNode, root);
 		root = tempNode->left;
 		if (nodeToRemove != NULL) {
 			delete nodeToRemove;
@@ -78,7 +84,7 @@ bool BST::deleteName(string val)
 		return false;
 	}
 	else {
-		Node *nodeToRemove = deleteName(val, NULL, root);
+		Node *nodeToRemove = deleteByName(val, NULL, root);
 		if (nodeToRemove != NULL) {
 			delete nodeToRemove;
 			return true;
@@ -86,25 +92,26 @@ bool BST::deleteName(string val)
 		return false;
 	}
 }
+
 // recursive function to delete a city by name
-Node * BST::deleteName(string data, Node * parent, Node * child)
+Node * BST::deleteByName(string data, Node * parent, Node * child)
 {
 	if (data < child->data.name) {
 		if (child->left != NULL) {
-			return deleteName(data, child, child->left);
+			return deleteByName(data, child, child->left);
 		}
 		return NULL;
 	}
 	else if (data > child->data.name) {
 		if (child->right != NULL) {
-			return deleteName(data, child, child->right);
+			return deleteByName(data, child, child->right);
 		}
 		return NULL;
 	}
 	else {
 		if (child->left != NULL && child->right != NULL) {
 			child->data = minValue(child->right);
-			return deleteName(child->data.name, child, child->right);
+			return deleteByName(child->data.name, child, child->right);
 		}
 		else if (parent->left == child) {
 			if (child->left != NULL)
@@ -128,6 +135,23 @@ Node * BST::deleteName(string data, Node * parent, Node * child)
 	}
 }
 
+// non-recursive function to delete a node by its coordinates
+bool BST::deleteByCoords(double lat, double lon)
+{
+	// create coords pair from the lat and lon values
+	std::pair  <double, double> val = make_pair(lat, lon);
+	if (root == NULL) {
+		return false;
+	}
+	else {
+		// We need to find the correct city and then perform a delete
+		Node *nodeToFind = searchByCoords(lat, lon);
+		if(nodeToFind)
+			deleteByName(nodeToFind->data.name);
+		else
+			return false;
+	}
+}
 
 City BST::minValue()
 {
@@ -141,6 +165,130 @@ City BST::minValue(Node * node)
 	}
 	return node->data;
 }
+
+// non-recursive function to search for a city by name  
+Node * BST::searchByName(string name)
+{
+	return searchByName(name, root);
+}
+
+// recursive function to search for a city by name 
+Node * BST::searchByName(string name, Node * leaf)
+{
+	if (leaf != NULL)
+	{
+		if (name == leaf->data.name)
+			return leaf;
+		if (name < leaf->data.name)
+			return searchByName(name, leaf->left);
+		else
+			return searchByName(name, leaf->right);
+	}
+	else return NULL;
+}
+
+// non-recusrive function to search for a city using its coords
+Node * BST::searchByCoords(double lat, double lon)
+{
+	pair <double, double> loc = make_pair(lat, lon);
+	return searchByCoords(loc, root);
+}
+// recusrive function to search for a city using its coords
+Node * BST::searchByCoords(pair<double, double> loc, Node * node)
+{
+	if (!node) {
+		return NULL;
+	}
+
+	if (node->data.coords == loc) {
+		return node;
+	}
+
+	Node *left = searchByCoords(loc, node->left);
+	Node *right = searchByCoords(loc, node->right);
+
+	if (left != NULL) {
+		return left;
+	}
+	else if (right != NULL) {
+		return right;
+	}
+}
+
+
+// non-recusrive function to print nodes in order
+void BST::printInOrder()
+{
+	if (root == NULL) {
+		printf("Tree is empty!!");
+	}
+	else {
+		printInOrder(root);
+	}
+}
+
+// recusrive function to print nodes in order
+void BST::printInOrder(Node * node)
+{
+	if (!node) // end the recursion if node == nullptr
+		return;
+
+	printInOrder(node->left);
+	cout << node->data;
+	printInOrder(node->right);
+
+}
+//	-----   Print cities within a distance
+// non-recusrive function to print nodes in order
+void BST::printWithinDistance(std::pair<double, double> point, int distance) 
+{
+	if (root == NULL) {
+		printf("Tree is empty!!");
+	}
+	else {
+		printWithinDistance(root, point, distance);
+	}
+}
+
+// recusrive function to print nodes in order
+void BST::printWithinDistance(Node * node, std::pair<double, double> point, int distance)
+{
+	if (!node) // end the recursion if node == nullptr
+		return;
+
+	printWithinDistance(node->left, point, distance);
+	// Perform logic here  distanceEarth(double lat1d, double lon1d, double lat2d, double lon2d)
+	double point1 = distanceEarth(node->data.coords.first, node->data.coords.second, point.first, point.second);
+	if (point1 < distance)
+		cout << node->data;
+	printWithinDistance(node->right, point, distance);
+
+}
+
+// Non-recursive public function to obtain the hegiht of the tree
+int BST::height(Node * node)
+{
+	if (node == NULL) {
+		return 0;
+	}
+	int left = height(node->left);
+	int right = height(node->right);
+
+	return max(left, right);
+}
+// Recursive function to obtain the height of the tree
+int BST::height()
+{
+	if (root == NULL)
+	{
+		return -1;
+	}
+	else
+		return height(root);
+}
+
+
+
 
 
 

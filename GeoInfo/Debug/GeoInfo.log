@@ -1,6 +1,16 @@
-﻿  Program.cpp
-c:\users\user\dev\geoinfo\geoinfo\program.cpp(12): warning C4305: 'argument': truncation from 'double' to 'float'
+﻿  BST.cpp
+  Generating Code...
+c:\users\user\dev\geoinfo\geoinfo\bst.cpp(216): warning C4715: 'BST::searchByCoords': not all control paths return a value
+c:\users\user\dev\geoinfo\geoinfo\bst.cpp(136): warning C4715: 'BST::deleteByName': not all control paths return a value
+c:\users\user\dev\geoinfo\geoinfo\bst.cpp(154): warning C4715: 'BST::deleteByCoords': not all control paths return a value
+  Compiling...
+  Program.cpp
 c:\users\user\dev\geoinfo\geoinfo\program.cpp(13): warning C4305: 'argument': truncation from 'double' to 'float'
 c:\users\user\dev\geoinfo\geoinfo\program.cpp(14): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\user\dev\geoinfo\geoinfo\program.cpp(15): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\user\dev\geoinfo\geoinfo\program.cpp(16): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\user\dev\geoinfo\geoinfo\program.cpp(18): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\user\dev\geoinfo\geoinfo\program.cpp(19): warning C4305: 'argument': truncation from 'double' to 'float'
+  Generating Code...
   GeoInfo.vcxproj -> C:\Users\User\Dev\GeoInfo\Debug\GeoInfo.exe
   GeoInfo.vcxproj -> C:\Users\User\Dev\GeoInfo\Debug\GeoInfo.pdb (Partial PDB)

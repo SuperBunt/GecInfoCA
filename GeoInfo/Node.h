@@ -15,6 +15,7 @@ public:
 	Node *left;
 	Node *right;
 	bool isLeaf();
+	string getName();
 protected:
 	City data;
 };

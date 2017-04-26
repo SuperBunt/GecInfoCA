@@ -112,6 +112,7 @@
   <ItemGroup>
     <ClInclude Include="BST.h" />
     <ClInclude Include="City.h" />
+    <ClInclude Include="Distance.h" />
     <ClInclude Include="Node.h" />
   </ItemGroup>
   <ItemGroup>

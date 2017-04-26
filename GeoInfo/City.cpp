@@ -15,13 +15,14 @@ City::~City()
 {
 }
 
-//string City::getName()
-//{
-//	return name;
-//}
+
+string City::getName()
+{
+	return name;
+}
 
 ostream& operator<<(ostream& os, const City& city)
 {
-	os << "Name: " << city.name << "\nCo-ordinates: Latitude:" << city.coords.first << " Longitude: " << city.coords.second << "\nPopulation: " << city.population << endl;
+	os << "Name: " << city.name << "\tPopulation: " << city.population << "\nCo-ordinates: Latitude:" << city.coords.first << " Longitude: " << city.coords.second <<  endl;
 	return os;
 }

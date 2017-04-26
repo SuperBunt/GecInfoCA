@@ -12,6 +12,7 @@ public:
 	City(string name_in, double lat, double lon, int pop, float temp);
 	~City();
 	friend ostream& operator<<(ostream& os, const City& city);
+	string getName();
 protected:
 	std::string name;
 	std::pair <double, double> coords;

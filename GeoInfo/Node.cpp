@@ -20,3 +20,8 @@ bool Node::isLeaf()
 {
 	return false;
 }
+
+string Node::getName()
+{
+	return data.getName();
+}
